@@ -9,8 +9,8 @@ var scl;
 var screenBounds;
 var loadBuffer;
 
-var content;
-var loadedContent;
+var content = new Set();
+var loadedContent = new Set();
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
@@ -29,13 +29,6 @@ function setup() {
 
     screenBounds = new Bounds();
     loadBuffer = -20;
-
-    content = new Set();
-    loadedContent = new Set();
-
-    //test content
-    content.add(new ImageContent("assets/images/big picture.png", 100, 100, 150, 150));
-    content.add(new DivContent("content/html/test.html", -350, 0, 300, 300));
 }
 
 function draw() {
@@ -52,6 +45,8 @@ function draw() {
             if (!loadedContent.has(c)) {
                 c.load();
                 loadedContent.add(c);
+                loadedContent = sortByLayer(loadedContent);
+                console.log(loadedContent);
                 if (DEBUG) console.log("load");
             }
         } else if (loadedContent.has(c)) {
@@ -114,8 +109,14 @@ function mouseDragged() {
     viewer.y += movedY;
 }
 
+function sortByLayer(contentSet) {
+    let arr = Array.from(contentSet);
+    arr.sort((a, b) => b.layer - a.layer).reverse();
+    return new Set(arr);
+}
+
 function zoom(event) {
-    var factor;
+    let factor;
     if (event.deltaY > 0) {
         factor = 1 + scl.factor;
         if (scl.value >= scl.max) return false;

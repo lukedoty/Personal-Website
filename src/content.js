@@ -2,43 +2,44 @@
 
 class Content {
     
-    constructor(bounds, load, unload, update, draw) {
+    constructor(bounds, load, unload, update, draw, layer) {
         this.bounds = bounds;
         this.load = load;
         this.data = null;
         this.unload = unload;
         this.update = update;
         this.draw = draw;
+        this.layer = layer;
     }
 }
 
 class ImageContent extends Content {
-    constructor(path, x, y, w, h) {
+    constructor(path, layer, x, y, w, h) {
 
-        var imgBounds = new Bounds(x, y, w, h);
-        var imgLoad = function() {
+        let imgBounds = new Bounds(x, y, w, h);
+        let imgLoad = function() {
             this.data = {
                 'img': null,
             }
 
             this.data.img = loadImage(path);
         }
-        var imgUnload = function() {
+        let imgUnload = function() {
             this.data = null;
         }
-        var imgUpdate = function() {}
-        var imgDraw = function() {
+        let imgUpdate = function() {}
+        let imgDraw = function() {
             image(this.data.img, 0, 0, this.bounds.w, this.bounds.h);
         }
 
-        super(imgBounds, imgLoad, imgUnload, imgUpdate, imgDraw);
+        super(imgBounds, imgLoad, imgUnload, imgUpdate, imgDraw, layer);
     }
 }
 
 class DivContent extends Content {
-    constructor(path, x, y, w, h) {
-        var divBounds = new Bounds(x, y, w, h);
-        var divLoad = async function() {
+    constructor(path, layer, x, y, w, h) {
+        let divBounds = new Bounds(x, y, w, h);
+        let divLoad = async function() {
             this.data = {
                 'div': null,
             }
@@ -55,19 +56,19 @@ class DivContent extends Content {
             const loadedContent = document.getElementById("loadedContent");
             loadedContent.append(this.data.div);
         }
-        var divUnload = function() {
+        let divUnload = function() {
             this.data.div.remove();
             this.data = null;
         }
-        var divUpdate = function() {
+        let divUpdate = function() {
             if (this.data.div != null) {
                 this.data.div.style.left = (viewer.x + (centerOffset.x + this.bounds.x) * scl.value) + 'px';
                 this.data.div.style.top = (viewer.y + (centerOffset.y + this.bounds.y) * scl.value) + 'px';
                 this.data.div.style.transform = "scale(" + scl.value + "," + scl.value + ")";
             }
         }
-        var divDraw = function() {}
+        let divDraw = function() {}
 
-        super(divBounds, divLoad, divUnload, divUpdate, divDraw);
+        super(divBounds, divLoad, divUnload, divUpdate, divDraw, layer);
     }
 }

@@ -28,7 +28,7 @@ function setup() {
     }
 
     screenBounds = new Bounds();
-    loadBuffer = -20;
+    loadBuffer = 250;
 }
 
 function draw() {
@@ -46,7 +46,6 @@ function draw() {
                 c.load();
                 loadedContent.add(c);
                 loadedContent = sortByLayer(loadedContent);
-                console.log(loadedContent);
                 if (DEBUG) console.log("load");
             }
         } else if (loadedContent.has(c)) {

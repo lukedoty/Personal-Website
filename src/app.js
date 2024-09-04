@@ -76,7 +76,7 @@ function draw() {
     }
 
     //0, 0 Gizmo
-    if (DEBUG) draw00();
+    if (DEBUG) draw00Gizmo();
 
     //Draw content
     loadedContent.forEach(lc => {
@@ -131,7 +131,7 @@ function zoom(event) {
     return false;
 }
 
-function draw00() {
+function draw00Gizmo() {
     push();
     strokeWeight(20);
     stroke('red');

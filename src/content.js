@@ -36,6 +36,8 @@ class ImageContent extends Content {
     }
 }
 
+//Note: Other content cannot overlap div content regardless of sorting layer.
+//      Layer systems for canvas rendering and html rendering are unique.
 class DivContent extends Content {
     constructor(path, layer, x, y, w, h) {
         let divBounds = new Bounds(x, y, w, h);
@@ -52,6 +54,7 @@ class DivContent extends Content {
             this.data.div.style.width = this.bounds.w + 'px';
             this.data.div.style.height = this.bounds.h + 'px';
             this.data.div.style.transformOrigin = 'top left';
+            this.data.div.style.zIndex = layer;
 
             const loadedContent = document.getElementById("loadedContent");
             loadedContent.append(this.data.div);

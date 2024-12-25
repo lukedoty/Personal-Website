@@ -1,5 +1,3 @@
-//TODO: Figure out what to do about zooming while over html elements. Currently does not work.
-
 const DEBUG = false;
 
 var canvas;
@@ -16,7 +14,6 @@ var loadedContent = new Set();
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
-    canvas.mouseWheel(zoom);
     canvas.position(0, 0);
     canvas.style('z-index', '-1');
 
@@ -116,22 +113,20 @@ function sortByLayer(contentSet) {
     return new Set(arr);
 }
 
-function zoom(event) {
+window.addEventListener("wheel", function(e) {
     let factor;
-    if (event.deltaY > 0) {
+    if (e.deltaY < 0) {
         factor = 1 + scl.factor;
-        if (scl.value >= scl.max) return false;
+        if (scl.value >= scl.max) return;
     } else {
         factor = 1 - scl.factor;
-        if (scl.value <= scl.min) return false;
+        if (scl.value <= scl.min) return;
     }
     
     scl.value *= factor;
     viewer.x = mouseX - (mouseX * factor) + (viewer.x * factor);
     viewer.y = mouseY - (mouseY * factor) + (viewer.y * factor);
-
-    return false;
-}
+});
 
 function draw00Gizmo() {
     push();

@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "Rubik";
+    src: url("/assets/fonts/Rubik-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("/assets/fonts/Rubik-Italic-VariableFont_wght.ttf") format("truetype");
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/assets/fonts/InterVariable.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/assets/fonts/InterVariable-Italic.ttf") format("truetype");
+    font-style: italic;
+}

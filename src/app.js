@@ -1,4 +1,6 @@
-const DEBUG = true;
+//TODO: Figure out what to do about zooming while over html elements. Currently does not work.
+
+const DEBUG = false;
 
 var canvas;
 
@@ -19,7 +21,7 @@ function setup() {
     canvas.style('z-index', '-1');
 
     centerOffset = createVector(windowWidth / 2, windowHeight / 2);
-    viewer = createVector(0, 0);
+    viewer = createVector(-1224, -2024);
     scl = {
         'value': 1,
         'min': 0.1,

@@ -18,7 +18,7 @@ function setup() {
     canvas.style('z-index', '-1');
 
     centerOffset = createVector(windowWidth / 2, windowHeight / 2);
-    viewer = createVector(-1224, -2024);
+    viewer = createVector(-1824, -3200);
     scl = {
         'value': 1,
         'min': 0.1,
